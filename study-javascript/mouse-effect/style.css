@@ -1,0 +1,254 @@
+@font-face {
+  font-family: 'NEXONLv1Gothic';
+  font-weight: 300;
+  font-style: normal;
+  src: url(https://cdn.jsdelivr.net/gh/webfontworld/NEXONGothic/NEXONLv1GothicLowOTFLight.woff) format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NEXONLv1Gothic';
+  font-weight: 400;
+  font-style: normal;
+  src: url(https://cdn.jsdelivr.net/gh/webfontworld/NEXONGothic/NEXONLv1GothicOTF.woff) format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NEXONLv1Gothic';
+  font-weight: 700;
+  font-style: normal;
+  src: url(https://cdn.jsdelivr.net/gh/webfontworld/NEXONGothic/NEXONLv1GothicOTFBold.woff) format('woff');
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* mouse */
+.mouse {
+  background: #222;
+  color: #fff;
+  font-family: 'NEXONLv1Gothic';
+  font-weight: 400;
+}
+
+.bg {
+  position: relative;
+  height: 100vh;
+  background-image: url(img/bg01.webp);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.bg.page2 {
+  background-image: url(img/bg02.jpeg);
+}
+
+article.mouseCont em {
+  border-bottom: 0.2vw dashed orange;
+  color: orange;
+}
+
+.bg::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(5, 36, 70, 0.7);
+  z-index: -1;
+}
+
+/* info */
+.info {
+  color: #fff;
+  font-family: "NEXONLv1Gothic";
+  padding: 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.info.right {
+  left: auto;
+  right: 0px;
+  top: 0px;
+}
+
+.info h1 {
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 1.6;
+  border-bottom: 1px dashed #fff;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.info h1 a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.info p {
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.info li {
+  list-style: none;
+  display: inline;
+}
+
+.info li a {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  border: 1px dashed #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  line-height: 21px;
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.info li.active a {
+  background: #fff;
+  color: #000;
+}
+
+.info.left {
+  top: auto;
+  right: 0px;
+  bottom: 0px;
+}
+
+.info.left li {
+  display: block;
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* mouseCont */
+.mouseCont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #fff;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'NEXONLv1Gothic';
+  cursor: none;
+}
+
+.mouseCont p {
+  width: 70%;
+  font-size: 2.5vw;
+  line-height: 2;
+  font-weight: 300;
+}
+
+.mouseCont p:last-child {
+  font-size: 3vw;
+  font-weight: normal;
+  font-weight: 400;
+}
+
+.mouseCont span {
+  font-style: normal;
+  border-bottom: 0.15vw dashed #fff;
+}
+
+.cursor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  z-index: 9999;
+  background-color: rgba(255, 255, 255, 0.1);
+  user-select: none;
+  pointer-events: none;
+  transition:
+    background-color .2s,
+    border-color .2s,
+    border-radius .2s,
+    transform .6s
+}
+
+.cursor.style1 {
+  background-color: rgba(255, 165, 0, 0.4);
+  border-color: orange
+}
+
+.cursor.style2 {
+  background-color: rgb(140, 0, 255, 0.4);
+  border-color: rgb(140, 0, 255);
+  transform: rotateY(720deg) scale(2);
+}
+
+.cursor.style3 {
+  background-color: rgb(0, 47, 255, 0.4);
+  border-color: rgb(0, 47, 255);
+  transform: scale(1.5) rotate(45deg);
+  border-radius: 10px;
+}
+
+.cursor.style4 {
+  background-color: rgb(121, 235, 197, 0.4);
+  border-color: rgb(121, 235, 197);
+  transform: scale(10) rotateY(360deg);
+}
+
+.cursor.style5 {
+  background-color: rgb(255, 0, 85, 0.4);
+  border-color: rgb(255, 0, 85);
+  transform: rotateY(720deg) scale(0.1);
+}
+
+.cursor.style6 {
+  background-color: rgb(255, 81, 0, 0.4);
+  border-color: rgb(255, 81, 0);
+  transform: scale(1.5) rotate(-720deg);
+  border-radius: 0;
+}
+
+.cursor-follower {
+  position: absolute;
+  width: 30px; height: 30px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  user-select: none;
+  pointer-events: none;
+  transition: transform 0.6s ease-in-out, opacity 0.2s ease-in-out;
+}
+.cursor-follower.active {
+  transform: scale(5);
+  background: rgba(255, 166, 0, 0.6);
+}
+.cursor-follower.show {
+  transform: scale(5);
+  background: rgba(255, 51, 0, 0.6);
+}
+
+.cursor.active {
+  opacity: .5;
+  transform: scale(0);
+}
+.cursor.show {
+  opacity: .5;
+  transform: scale(1);
+  background: rgba(255, 51, 0, 1);
+}

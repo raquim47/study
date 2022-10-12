@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mouse Effect Script</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="mouse bg page2">
+
+  <!-- main -->
+  <main id="mouseCont">
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <article class="mouseCont">
+      <p>I DONT <em>WANNA</em> BE YOU <em>ANYMORE</em></p>
+    </article>
+  </main>
+  <!-- //main -->
+
+  <!-- info -->
+  <div class="info">
+    <h1>Mouse Effect02 - Javascript</h1>
+    <p>마우스 이펙트 - 따라다니기</p>
+  </div>
+
+  <div class="info right">
+    <ul>
+      <li><a href="mouseeffect01.html">1</a></li>
+      <li class="active"><a href="mouseeffect02.html">2</a></li>
+      <li><a href="mouseeffect03.html">3</a></li>
+      <li><a href="mouseeffect04.html">4</a></li>
+      <li><a href="mouseeffect05.html">5</a></li>
+      <li><a href="mouseeffect06.html">6</a></li>
+      <li><a href="mouseeffect07.html">7</a></li>
+      <li><a href="mouseeffect08.html">8</a></li>
+    </ul>
+  </div>
+
+  <div class="info left">
+    <ul>
+      <li>pageX : <span class="pageX">0</span>px</li>
+      <li>pageY : <span class="pageY">0</span>px</li>
+    </ul>
+  </div>
+  <!-- //info -->
+
+  <!-- script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+  <script>
+    // 출력용
+    document.addEventListener('mousemove', (e)=>{
+      document.querySelector('.pageX').textContent = e.pageX;
+      document.querySelector('.pageY').textContent = e.pageY;
+    });
+    // 움직임효과
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
+
+    document.addEventListener('mousemove', e=> {
+      gsap.to(cursor, {
+        duration: 0.3,
+        left: e.pageX - 5,
+        top: e.pageY -5
+      });
+      gsap.to(follower, {
+        duration: 0.8,
+        left: e.pageX - 15,
+        top: e.pageY -15
+      });
+    });
+    // 오버효과
+    document.querySelectorAll('.mouseCont em').forEach(e=>{
+      e.addEventListener('mouseenter', ()=>{
+        cursor.classList.add('active');
+        follower.classList.add('active');
+      });
+      e.addEventListener('mouseleave', ()=>{
+        cursor.classList.remove('active');
+        follower.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+
+</html>

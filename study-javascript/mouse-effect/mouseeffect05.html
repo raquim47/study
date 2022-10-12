@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mouse Effect Script</title>
+  <style>
+    @font-face {
+      font-family: 'NEXONLv1Gothic';
+      font-weight: 300;
+      font-style: normal;
+      src: url(https://cdn.jsdelivr.net/gh/webfontworld/NEXONGothic/NEXONLv1GothicLowOTFLight.woff) format('woff');
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'NEXONLv1Gothic';
+      font-weight: 400;
+      font-style: normal;
+      src: url(https://cdn.jsdelivr.net/gh/webfontworld/NEXONGothic/NEXONLv1GothicOTF.woff) format('woff');
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'NEXONLv1Gothic';
+      font-weight: 700;
+      font-style: normal;
+      src: url(https://cdn.jsdelivr.net/gh/webfontworld/NEXONGothic/NEXONLv1GothicOTFBold.woff) format('woff');
+      font-display: swap;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* mouse */
+    .mouse {
+      background: #222;
+      color: #fff;
+      font-family: 'NEXONLv1Gothic';
+      font-weight: 400;
+    }
+
+    .bg {
+      position: relative;
+      height: 100vh;
+      background-image: url(img/bg05.jpeg);
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+
+    .bg::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: rgba(5, 36, 70, 0.8);
+      z-index: -1;
+    }
+
+    /* info */
+    .info {
+      color: #fff;
+      font-family: "NEXONLv1Gothic";
+      padding: 20px;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .info.right {
+      left: auto;
+      right: 0px;
+      top: 0px;
+    }
+
+    .info h1 {
+      font-weight: 300;
+      font-size: 20px;
+      line-height: 1.6;
+      border-bottom: 1px dashed #fff;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .info h1 a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 400;
+    }
+
+    .info p {
+      font-weight: 300;
+      font-size: 16px;
+    }
+
+    .info li {
+      list-style: none;
+      display: inline;
+    }
+
+    .info li a {
+      display: inline-block;
+      text-decoration: none;
+      color: #fff;
+      border: 1px dashed #fff;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      line-height: 21px;
+      text-align: center;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+
+    .info li.active a {
+      background: #fff;
+      color: #000;
+    }
+
+    .info.left {
+      top: auto;
+      right: 0px;
+      bottom: 0px;
+      width: 200px;
+    }
+
+    .info.left li {
+      display: block;
+      font-size: 14px;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* mouseCont */
+    .mouseCont {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100vh;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .moveImage {
+      position: relative;
+      cursor: none;
+    }
+
+    .moveImage .mImg {
+      width: 50vw;
+      height: 60vh;
+      background: #ccc;
+      position: relative;
+      overflow: hidden;
+      transition: transform 500ms cubic-bezier(0.25, 0.46, 0.45, 0.84);
+    }
+
+    .moveImage:hover .mImg {
+      transform: scale(1.025);
+    }
+
+    .moveImage .mImg img {
+      position: absolute;
+      left: -5%;
+      top: -5%;
+      width: 110%;
+      height: 110%;
+      object-fit: cover;
+      transition: transform 500ms cubic-bezier(0.25, 0.46, 0.45, 0.84);
+    }
+
+    .moveImage:hover .mImg img {
+      filter: grayscale(0%)
+    }
+
+    .moveImage .mText {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-size: 3vw;
+      line-height: 1.6;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .cursor {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      z-index: 1000;
+      user-select: none;
+      pointer-events: none;
+    }
+  </style>
+
+</head>
+
+<body class="mouse bg">
+
+  <!-- main -->
+  <main>
+    <div class="cursor"></div>
+
+    <article class="mouseCont">
+      <div class="moveImage">
+        <div class="mImg">
+          <img src="img/bg05.jpeg" alt="이미지">
+        </div>
+        <div class="mText">
+          <p>Unknown girl</p>
+        </div>
+      </div>
+    </article>
+  </main>
+  <!-- //main -->
+
+  <!-- info -->
+  <div class="info">
+    <h1><a href="mouseIndex.html">Mouse Effect05 - Javascript</a></h1>
+    <p>마우스 이펙트 - 이미지 효과</p>
+  </div>
+
+  <div class="info right">
+    <ul>
+      <li><a href="mouseeffect01.html">1</a></li>
+      <li><a href="mouseeffect02.html">2</a></li>
+      <li><a href="mouseeffect03.html">3</a></li>
+      <li><a href="mouseeffect04.html">4</a></li>
+      <li class="active"><a href="mouseeffect05.html">5</a></li>
+      <li><a href="mouseeffect06.html">6</a></li>
+      <li><a href="mouseeffect07.html">7</a></li>
+      <li><a href="mouseeffect08.html">8</a></li>
+    </ul>
+  </div>
+
+  <div class="info left">
+    <ul>
+      <li>pageX : <span class="pageX">0</span></li>
+      <li>pageY : <span class="pageY">0</span></li>
+      <li>standardX : <span class="standardX">0</span></li>
+      <li>standardY : <span class="standardY">0</span></li>
+    </ul>
+  </div>
+  <!-- //info -->
+
+  <!-- script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+  <script>
+    document.querySelector('.moveImage').addEventListener('mousemove', e => {
+      // 커서 포인터
+      gsap.to('.cursor', {
+        duration: .2,
+        left: e.pageX - 10,
+        top: e.pageY - 10
+      });
+
+
+      // 가운데를 기준점으로 현재 마우스 좌표를 뺀값 만큼을 움직여라
+      // 넘치면 마이너스가 되니까 마우스가 오른쪽에 있을때 이미지는 왼쪽으로 이동
+
+      // 마우스 좌표
+      let pageX = e.pageX;
+      let pageY = e.pageY;
+
+      // 기준점을 가운데로
+      let standardX = window.innerWidth / 2 - pageX;
+      let standardY = window.innerHeight / 2 - pageY;
+
+      //이미지 움직임
+      const move = document.querySelector(".mImg img");
+      move.style.transform = "translate(" + standardX / 20 + "px," + standardY / 10 + "px)";
+
+      //출력
+      document.querySelector(".pageX").textContent = pageX;
+      document.querySelector(".pageY").textContent = pageY;
+      document.querySelector(".standardX").textContent = standardX;
+      document.querySelector(".standardY").textContent = standardY;
+    });
+  </script>
+</body>
+
+</html>

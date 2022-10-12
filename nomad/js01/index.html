@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 1. 폼 submit, 새로 고침 제어(submit했을때의 기본 동작) -->
+  <form id="login-form">
+    <input type="text" placeholder="What is your name?" required maxlength="15">
+    <input type="submit" value="Log In">
+    <!-- <input type="submit" value="Log In"> 태그가 있으면 form 에서 엔터를 누르고 input이 더 존재하지 않는다면 자동으로 submit (버튼을 클릭하지 않아도) -->
+    <!-- <button>Log In</button> -->
+  </form>
+
+  <!-- 2. a 링크 제어-->
+  <a href="https://www.naver.com">Go To Naver</a>
+
+  <!-- 3. form에 name입력했을 때 form은 사라지고 name값을 h1에 담기 + 로컬스토래지 유저정보 확인 -->
+  <h1 id="greeting" class="hidden"></h1>
+  <form id="login-form2" class="hidden">
+    <input class="name-input2" type="text" placeholder="What is your name?" required maxlength="15">
+    <input type="submit" value="Log In">
+  </form>
+
+  <script src="greetings.js"></script>
+</body>
+
+</html>

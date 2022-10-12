@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .main {
+        margin: auto;
+        width: 200px;
+        margin-top: 100px;
+      }
+
+      .keyWord {
+        color: blue;
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      input {
+        width: 200px;
+        height: 25px;
+      }
+
+      .timeZone {
+        text-align: center;
+        margin-top: 10px;
+        color: red;
+      }
+
+      .point {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .point > span {
+        color: green;
+        font-size: 25px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="keyWord"></div>
+      <input type="text" id="word" autocomplete="off" />
+      <div class="timeZone"></div>
+      <div class="point">
+        <span>점수 : </span>
+        <span id="point"></span>
+      </div>
+    </div>
+    <script>
+      const startWords = ["우리말", "끝말잇기", "게임"];
+      const index = Math.floor(Math.random() * startWords.length);
+      let word = startWords[index];
+
+      const keyWord = document.querySelector(".keyWord");
+      const timeZone = document.querySelector(".timeZone");
+      const input = document.querySelector("#word");
+      const pointZone = document.querySelector("#word");
+      let time = 500;
+      let point = 0;
+
+      keyWord.innerText = word;
+      pointZone.innerText = point;
+      input.focus();
+
+      const timeCheck = () => {
+        timeZone.innerText = time;
+        if (time === 0) {
+          clearInterval(start);
+          input.setAttribute("disabled", true);
+          alert(`game ove \n point : ${point}`);
+        } else {
+          time -= 1;
+        }
+      };
+      timeCheck();
+      let start = setInterval(timeCheck, 1000);
+
+      const apiKey = "07E1469BD6B2C63C93F69B493D3BFA0F";
+
+      input.addEventListener("keydown", function (event) {
+        if (event.keyCode === 13) {
+          const prevWord = keyWord.innerText;
+          word = this.value;
+          console.log(word);
+          clearInterval(start);
+
+          if (
+            word.length > 1 &&
+            HanTools.dueum(prevWord[prevWord.length - 1]) === word[0]
+          ) {
+            fetch(
+              `https://opendict.korean.go.kr/api/search?key=${apiKey}&q=${word}&advanced=y&method=exact`,
+              {
+                mode: "cors",
+                credentials: "include", // 여기를 추가
+              }
+            )
+              .then((res) => {
+                return res.text();
+              })
+              .then((data) => {
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(data, "text/xml");
+                const result =
+                  xmlDoc.getElementsByTagName("total")[0].childNodes[0]
+                    .nodeValue;
+
+                if (result > 0) {
+                  keyWord.innerText = word;
+                  this.value = "";
+                  this.style.outline = "";
+                  time = 100;
+
+                  point = point + word.length * 10;
+                  pointZone.innerText = point;
+
+                  fetch(
+                    `https://opendict.korean.go.kr/api/search?key=${apiKey}&q=${HanTools.dueum(
+                      word[word.length - 1]
+                    )}&advanced=y&sort=popular&type1=word&method=start&num=100`,
+                    {
+                      mode: "cors",
+                      credentials: "include", // 여기를 추가
+                    }
+                  )
+                    .then((res) => {
+                      return res.text();
+                    })
+                    .then((comData) => {
+                      const comXmlDoc = parser.parseFromString(
+                        comData,
+                        "text/xml"
+                      );
+                      const item = comXmlDoc.getElementsByTagName("item");
+                      let comWord = [];
+
+                      Array.from(item).forEach((item) =>
+                        comWord.push(
+                          item.getElementsByTagName("word")[0].childNodes[0]
+                            .nodeValue
+                        )
+                      );
+                      comWord = comWord
+                        .map((word) => word.replace(/\-|^/g, ""))
+                        .filter((word) => word.length > 1);
+
+                      keyWord.innerText =
+                        comWord[Math.floor(Math.random() * comWord.length)];
+
+                      timeCheck();
+                      start = setInterval(timeCheck, 1000);
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
+                } else {
+                  this.value = "";
+                  this.style.outline = `1px solid red`;
+                  start = setInterval(timeCheck, 1000);
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          } else {
+            this.value = "";
+            this.style.outline = `1px solid red`;
+            start = setInterval(timeCheck, 1000);
+          }
+        }
+      });
+    </script>
+    <script src="hangul-tools.js"></script>
+  </body>
+</html>

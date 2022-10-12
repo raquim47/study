@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50%;
+      
+    }
+
+    .card {
+      min-height: 50vh;
+      width: 26rem;
+      border-radius: 30px;
+      padding: 3rem 5rem;
+      box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
+      transform-style: preserve-3d;
+      animation: rotateCard 4s infinite;
+
+    }
+
+    .title {
+      margin-top: 2rem;
+      transform-style: preserve-3d;
+      transform: translateZ(1px);
+      text-align: center;
+    }
+
+    .sneaker {
+      min-height: 25vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-style: preserve-3d;
+    }
+
+    .sneaker img {
+      width: 12rem;
+      transition: all 0.5s ease;
+      z-index: 2;
+    }
+
+    .circle {
+      position: absolute;
+      width: 10rem;
+      height: 10rem;
+      border-radius: 50%;
+      background: linear-gradient(to right,
+          rgba(245, 70, 66, 0.76),
+          rgba(128, 64, 201, 0.75));
+      z-index: 1;
+    }
+
+    .info {
+      transform-style: preserve-3d;
+    }
+
+    .info h1 {
+      font-size: 3rem;
+    }
+
+    .info h3 {
+      font-size: 1.3rem;
+      padding: 2rem 0;
+      color: #585858;
+      font-weight: 400;
+    }
+
+    .sizes {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .sizes button {
+      padding: 0.5rem 1.5rem;
+      background: none;
+      border: none;
+      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 30px;
+      font-weight: bold;
+      color: #585858;
+      cursor: pointer;
+    }
+
+    .sizes button.active {
+      background: #585858;
+      color: #fff;
+    }
+
+    .open {
+      margin-top: 2.5rem;
+    }
+
+    .open button {
+      width: 100%;
+      padding: 1rem 0rem;
+      border: none;
+      border-radius: 30px;
+      background: #f54642;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    @keyframes rotateCard {
+      0% {
+        transform: rotateY(45deg);
+      }
+      50% {
+        transform: rotateY(-45deg);
+      }
+      100% {
+        transform: rotateY(45deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="sneaker">
+        <div class="circle"></div>
+        <img src="img/iu-img.png" alt="iu">
+      </div>
+      <div class="info">
+        <h1 class="title">IU</h1>
+        <h3>FUTURE-READY TRAINER WITH WRAPPED BOOST FOR EXCEPTION COMFORT.</h3>
+        <div class="sizes">
+          <button>39</button>
+          <button>40</button>
+          <button class="active">42</button>
+          <button>44</button>
+        </div>
+        <div class="open">
+          <button>Open</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Movement Animation to happen
+    const card = document.querySelector('.card');
+    const container = document.querySelector('.container');
+    //Items
+    const title = document.querySelector('.title');
+    const sneaker = document.querySelector('.sneaker img');
+    const description = document.querySelector('.info h3');
+
+    function rotateCard() {
+      let xAxis = (window.innerWidth / 2 - e.pageX) / 20;
+      let yAxis = (window.innerHeight / 2 - e.pageY) / 20;
+      card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    };
+
+
+    //Moving Animation Event
+    container.addEventListener('mousemove', e => {
+      let xAxis = (window.innerWidth / 2 - e.pageX) / 20;
+      let yAxis = (window.innerHeight / 2 - e.pageY) / 20;
+      card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    });
+
+    // Animate In
+    container.addEventListener('mouseenter', e => {
+      card.style.transition = 'none';
+      // Popout
+      title.style.transform = 'translateZ(150px)';
+      sneaker.style.transform = 'translateZ(100px) rotateZ(-2deg)';
+      description.style.transform = 'translateZ(100px)';
+    });
+    // Animate Out
+    container.addEventListener('mouseleave', e => {
+      card.style.transition = 'all 0.5s ease';
+      card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+      // Popback
+      title.style.transform = 'translateZ(0px)';
+      sneaker.style.transform = 'translateZ(0px) rotateZ(-0deg)';
+      description.style.transform = 'translateZ(0)';
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>홍승진 공부</title>
+
+  <!-- style -->
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/prism.css" />
+</head>
+
+<body>
+  <div class="top"><a href="#header">Top</a></div>
+
+  <header id="header">
+    <h1><a href="/study/study-javascript/index.html">홍승진 공부</a></h1>
+    <nav>
+      <div class="note">
+        <a href="/study/study-javascript/basic/reference02.html">변수</a>
+        <a href="/study/study-javascript/basic/reference03.html">자료형</a>
+        <a href="/study/study-javascript/basic/reference05.html">연산자</a>
+        <a href="/study/study-javascript/basic/reference06.html">조건문</a>
+        <a href="/study/study-javascript/basic/reference07.html">반복문</a>
+        <a href="/study/study-javascript/basic/reference08.html">함수</a>
+        <a href="/study/study-javascript/basic/reference09.html">정규식</a>
+      </div>
+      <ul>
+        <li>
+          <a href="/study/study-javascript/index.html">데이터 저장하기</a>
+        </li>
+        <li><a href="/study/study-javascript/javascript02.html">데이터 불러오기</a></li>
+        <li><a href="/study/study-javascript/javascript03.html">데이터 실행하기</a></li>
+        <li><a href="/study/study-javascript/javascript04.html">데이터 제어하기</a></li>
+      </ul>
+      <ol class="practice01">
+        <li><a href="/study/study-javascript/parallax/index.html">패럴럭스</a></li>
+        <li><a href="/study/study-javascript/mouse-effect/mouseeffect01.html">마우스이펙트</a></li>
+      </ol>
+      <ol class="practice02">
+        <li class="active"><a href="/study/study-javascript/practice/practice01.html">데이터 연습</a></li>
+        <li><a href="/study/study-javascript/practice/algorithm01.html">알고리즘 문제</a></li>
+      </ol>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <div class="script">
+      <!-- 1. 1부터 10까지 출력 -->
+      <div class="mb40">
+        <h2>1. 1부터 10까지 출력</h2>
+        <div id="sample1" class="sample">
+          <h3>01. while문</h3>
+          <div class="code">
+            <pre class="line-numbers"><code class="language-js">
+  {
+    let num = 1;
+  
+    while(num <= 10){
+        document.write(num);
+        num++;
+      }
+  }
+            </code></pre>
+          </div>
+        </div>
+        <div id="sample1" class="sample">
+          <h3>02. for문</h3>
+          <div class="code">
+            <pre class="line-numbers"><code class="language-js">
+  {
+    for(let i=1; i<=10; i++){
+        document.write(i);
+    }
+  }
+            </code></pre>
+          </div>
+        </div>
+        <div id="sample1" class="sample">
+          <h3>03. for문 홀수, 짝수</h3>
+          <div class="code">
+            <pre class="line-numbers"><code class="language-js">
+  {
+    //짝수
+    for(let i=1; i<=10; i++){
+        if( i % 2 == 0 ){
+            console.log(i);
+        }
+    }
+  
+    //홀수
+    for(let i=1; i<=10; i++){
+        if( i % 2 != 0 ){
+            console.log(i);
+        }
+    }
+  
+    //다른 방법1 if문 중괄호 생략
+    for(let i=1; i<=10; i++){
+        if( i % 2 == 0 ) console.log(i);
+    }
+    
+    //다른 방법2
+    for(let i=2; i<=10; i+=2){
+        console.log(i);
+    }
+  }
+            </code></pre>
+          </div>
+        </div>
+        <div id="sample1" class="sample">
+          <h3>04. 1부터 10까지 합</h3>
+          <div class="code">
+            <pre class="line-numbers"><code class="language-js">
+  {
+    let sum = 0;
+    for(let i = 1; i <= 10; i++){
+        sum += + i;
+    }
+    console.log(sum);
+  }
+            </code></pre>
+          </div>
+        </div>     
+      </div>   
+      <!-- 2. 구구단 출력 -->
+      <div class="mb40">
+        <h2>2. 구구단 출력</h2>
+        <div id="sample1" class="sample">
+          <h3>01. 2단부터 5단까지 출력 for문</h3>
+          <div class="code">
+            <pre class="line-numbers"><code class="language-js">
+{
+  for(let i=2; i<=5; i++){
+      for(let j=1; j<=9; j++){
+          document.write(i + " * " + j + " = " +  i*j + "<br>");
+      }
+      document.write("=============<br>");
+  }
+}
+            </code></pre>
+          </div>
+        </div> 
+        <div id="sample1" class="sample">
+          <h3>02. 2단부터 5단까지 출력 while문</h3>
+          <div class="code">
+            <pre class="line-numbers"><code class="language-js">
+{
+  let i = 2, j = 1;
+
+  while(i <= 5){
+      while(j <= 9){
+          document.write(i + " * " + j + " = " + i*j + "<br>");
+          j++;
+      }
+      j = 1;
+      i++;
+      document.write("=============<br>");
+  }
+}
+            </code></pre>
+          </div>
+        </div> 
+        <div id="sample1" class="sample">
+          <h3>03. 사용자가 원하는 구구단을 입력해서 출력</h3>
+          <div class="code">
+            <pre class="line-numbers"><code class="language-js">
+{
+  let num, result;
+
+  //버튼을 클릭하면 경고창을 띄어주세요.
+  document.querySelector(".pBtn").addEventListener("click", () => {
+      num = prompt("출력할 구구단 숫자를 입력해주세요!!", "2");
+      document.querySelector(".result > div").classList.add("active"); // 버튼을 클릭하면 결과창이 무조건 열리게
+      
+      for(let i = 1; i <= 9; i++){
+          result = num + " * " + i + " = " + (num*i) + "<br>";
+          // console.log(result);
+          document.querySelector(".result > div").innerHTML += result;
+      }
+  });
+}
+            </code></pre>
+          </div>
+        </div> 
+      </div>   
+      <!-- 3. 테이블 출력 -->
+      <div class="mb40">
+        <h2>3. 테이블 출력</h2>
+        <div id="sample1" class="sample">
+          <h3>01. for문</h3>
+          <div class="code">
+            <pre class="line-numbers"><code class="language-js">
+{
+  let table = "<table>";
+
+  for( let i=1; i<=5; i++ ){
+      table += "<tr>";
+          for( let j=1; j<=5; j++){
+              table += "<td>1/td>";
+          }
+      table += "</tr>";
+  }
+  table += "</table>";
+
+  document.write(table);
+}
+            </code></pre>
+          </div>
+        </div> 
+        <div id="sample1" class="sample">
+          <h3>02. 1~25까지 숫자가 있는 테이블</h3>
+          <div class="code">
+            <pre class="line-numbers"><code class="language-js">
+{
+  let num = 1;
+  let table = "<table>";
+
+  for( let i=1; i<=5; i++ ){
+      table += "<tr>";
+          for( let j=1; j<=5; j++){
+              table += "<td>" + num + "</td>";
+              num++;
+          }
+      table += "</tr>";
+  }
+  table += "</table>";
+
+  document.write(table);
+}
+            </code></pre>
+          </div>
+        </div> 
+        <div id="sample1" class="sample">
+          <h3>03. while문, 1~25까지 숫자가 있는 테이블</h3>
+          <div class="code">
+            <pre class="line-numbers"><code class="language-js">
+{
+  let i = 1, j = 1, num = 1;
+  let table = "<table>"
+
+  while(i<=5){
+      table += "<tr>"
+          while(j<=5){
+              table += "<td>" + num + "</td>";
+              num++;
+              j++;
+          }
+          j = 1;
+      table += "</tr>";
+      i++;
+  }
+      table += "</table>";
+
+  document.write(table);
+}
+            </code></pre>
+          </div>
+        </div> 
+      </div> 
+    </div>
+    <!-- //script -->
+  </main>
+
+  <!-- script -->
+  <script src="../js/prism.js"></script>
+  <script src="../js/script.js"></script>
+</body>
+
+</html>

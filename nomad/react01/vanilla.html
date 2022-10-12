@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <span>Total clicks: 0</span>
+    <button id="btn">CLick me</button>
+  </body>
+  <script>
+    let counter = 0;
+    const button = document.querySelector("#btn");
+    const span = document.querySelector("span");
+
+    function handleClick(){
+      counter++;
+      span.innerText = `Total clicks: ${counter}`;
+    }
+    button.addEventListener('click', handleClick) 
+    // 자바스크립트 방식
+    // 1. html을 만들고
+    // 2. 자바스크립트로 가져와서
+    // 3. 이벤트를 감지하고
+    // 4. 데이터를 업데이트
+
+    // test
+    const App = () => {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Changes");
+      return (
+        <div>
+          <Btn banana={value} apple={changeValue} fontSize={18} />
+          <Btn banana="Continue"/>
+        </div>
+      );
+    };
+  </script>
+</html>

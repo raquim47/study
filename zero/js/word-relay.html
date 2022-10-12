@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>끝말잇기</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #main-form {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="start-form">
+    <input type="text">
+    <button type="submit">참가 인원 입력</button>
+  </form>
+  <form id="main-form">
+    <div>총 참가자 <span id="member">1</span></div>
+    <div><span id="order">1</span>번째 참가자</div>
+    <div>제시어: <span id="word"></span></div>
+    <input type="text" />
+    <button type="submit">입력</button>
+  </form>
+
+  <script>
+    const $startForm = document.querySelector('#start-form');
+    const $startInput = document.querySelector('#start-form input');
+    const $mainInput = document.querySelector('#main-form input');
+    const $mainForm = document.querySelector('#main-form');
+    const $word = document.querySelector('#word');
+    const $order = document.querySelector('#order');
+    const $member = document.querySelector('#member');
+    // prompt()는 활용하기 까다로워서 input으로 바꿈. 
+    let number;
+    const onSubmitStart = (e) => {
+      e.preventDefault();
+      number = $startInput.value;
+      if (number > 10 || number < 1 || isNaN(number)) {
+        alert('1과 10사이의 숫자를 입력해주세요');
+      } else {
+        $startForm.style.display = 'none';
+        $mainForm.style.display = 'block';
+        $member.innerText = number;
+      }
+    }
+    $startForm.addEventListener('submit', onSubmitStart);
+
+    let word = [];
+    let newWord;
+    let lastWord;
+
+    const onSubmitMain = (e) => {
+      e.preventDefault();
+      newWord = $mainInput.value;
+      if (word.includes(newWord)) {
+        alert('중복된 단어');
+      } else if (newWord.length === 3 && (!word[0] || lastWord[lastWord.length - 1] === newWord[0])) {
+        word.push(newWord);
+        lastWord = word[word.length - 1];
+        $word.innerText = lastWord;
+        const order = Number($order.textContent);
+        if (order + 1 > number) {
+          $order.innerText = 1;
+        } else {
+          $order.innerText = order + 1;
+        }
+      } else {
+        alert('올바르지 않은 단어입니다');
+      }
+      $mainInput.value = '';
+      $mainInput.focus();
+    }
+    $mainForm.addEventListener("submit", onSubmitMain);
+  </script>
+</body>
+
+</html>

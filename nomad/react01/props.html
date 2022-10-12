@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- production이 아닌 development 버전을 사용해야 propTypes 경고를 확인할 수 있음 -->
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function Btn({ banana, apple, fontSize = 40 }) {
+      console.log(banana, "was rendered");
+      return (
+        <button
+          onClick={apple}
+          style={{
+            background: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10,
+            // fontSize: fontSize, 이름이 같으면 생략가능
+            fontSize,
+          }}
+        >
+          {banana}
+        </button>
+      );
+    }
+
+    // memo: 컴포넌트의 props가 변경되지 않는다면 재렌더링 시키지 않음
+    // React.memo는 App 밖에서 사용
+    // const MemorizedBtn = React.memo(Btn);
+    // propTypes
+    // Btn.propTypes = {
+    //   banana: PropTypes.string.isRequired,
+    //   fontSize: PropTypes.number,
+    // };
+    Btn.propTypes = {
+      banana: PropTypes.string.isRequired,
+      fontSize: PropTypes.number,
+    };
+    
+    // 부모 컴포넌트의 state가 변경되면 그 안의 모든 것들은 재 렌더링된다
+    const App = () => {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Changes");
+      return (
+        <div>
+          <Btn banana={value} apple={changeValue} fontSize={18} />
+          <Btn banana="Continue"/>
+        </div>
+      );
+    };
+    const root = document.querySelector("#root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>

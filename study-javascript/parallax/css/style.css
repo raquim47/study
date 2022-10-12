@@ -1,0 +1,598 @@
+@import url('https://fonts.googleapis.com/css2?family=Aboreto&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  /* box-sizing: border-box; */
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+body {
+  background-color: #222;
+  color: #fff;
+  font-family: 'NexonLv1Gothic';
+  font-weight: 300;
+}
+
+#parallax__title {
+  padding: 20px;
+}
+
+#parallax__title h1 {
+  font-size: 30px;
+  border-bottom: 1px dashed #fff;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  font-weight: 400;
+  display: inline-block;
+}
+
+#parallax__title p {
+  font-size: 16px;
+}
+
+#parallax__title ul {
+  margin-top: 10px;
+}
+
+#parallax__title li {
+  display: inline;
+}
+
+#parallax__title li a {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px dashed #fff;
+  display: inline-block;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+}
+
+#parallax__title li.active a {
+  background: #fff;
+  color: #000;
+}
+
+#parallax__nav {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 15px 20px;
+  border-radius: 50px;
+}
+
+#parallax__nav li {
+  list-style: none;
+  display: inline;
+}
+
+#parallax__nav li a {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  text-align: center;
+  line-height: 30px;
+}
+
+#parallax__nav li.active a {
+  background: #fff;
+  color: black;
+  border-radius: 50%;
+  line-height: 30px;
+}
+
+#parallax__cont {
+  max-width: 1600px;
+  width: 98%;
+  margin: 0 auto;
+  /* background-color: rgba(255,255,255,0.1); */
+}
+
+.content__item {
+  width: 1000px;
+  max-width: 70vw;
+  margin: 30vw auto;
+  /* background-color: rgba(255,255,255,0.3); */
+  text-align: left;
+  margin-right: 0;
+  position: relative;
+  padding-top: 15vw;
+}
+
+.content__item:nth-child(even) {
+  margin-left: 0;
+  text-align: right;
+}
+
+.content__item:nth-child(even) .content__item__num {
+  left: auto;
+  right: -5vw;
+}
+
+.content__item__num {
+  font-weight: 500;
+  font-size: 30vw;
+  position: absolute;
+  left: -5vw;
+  top: -13vw;
+  opacity: 0.07;
+}
+
+.content__item__title {
+  font-family: 'Aboreto', cursive;
+  padding-bottom: 5px;
+  font-weight: 400;
+}
+
+.content__item__imgWrap {
+  width: 100%;
+  padding-bottom: 56.25%;
+  background: #000;
+  position: relative;
+  overflow: hidden;
+}
+
+.content__item__img {
+  position: absolute;
+  left: -5%;
+  top: -5%;
+  width: 110%;
+  height: 110%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  filter: saturate(0%);
+  transition: all 1s;
+}
+
+.content__item__img:hover {
+  filter: saturate(100%);
+  transform: scale(1.025);
+}
+
+.content__item:nth-child(1) .content__item__img {
+  background-image: url(../img/con01.jpeg);
+}
+
+.content__item:nth-child(2) .content__item__img {
+  background-image: url(../img/con02.jpeg);
+}
+
+.content__item:nth-child(3) .content__item__img {
+  background-image: url(../img/con03.jpeg);
+}
+
+.content__item:nth-child(4) .content__item__img {
+  background-image: url(../img/con04.jpeg);
+}
+
+.content__item:nth-child(5) .content__item__img {
+  background-image: url(../img/con05.jpeg);
+}
+
+.content__item:nth-child(6) .content__item__img {
+  background-image: url(../img/con06.jpeg);
+}
+
+.content__item:nth-child(7) .content__item__img {
+  background-image: url(../img/con07.jpeg);
+}
+
+.content__item:nth-child(8) .content__item__img {
+  background-image: url(../img/con08.jpeg);
+}
+
+.content__item:nth-child(9) .content__item__img {
+  background-image: url(../img/con09.jpeg);
+}
+
+.content__item__desc {
+  position: relative;
+  margin-top: -5vw;
+  margin-left: -4vw;
+  font-size: 4vw;
+  font-family: 'Aboreto', cursive;
+  word-break: keep-all;
+  line-height: 1.6;
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+
+.content__item:nth-child(even) .content__item__desc {
+  margin-left: auto;
+  margin-right: -4vw;
+}
+
+/* info */
+.scrollTop {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  padding: 10px 30px;
+  border-radius: 50px;
+}
+
+.scrollInfo {
+  position: fixed;
+  left: 20px;
+  bottom: 60px;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.scrollInfo li {
+  list-style: none;
+}
+
+/* 2. 닷메뉴 */
+
+#parallax__dot {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 20px 10px;
+  border-radius: 30px;
+}
+
+#parallax__dot li {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  list-style: none;
+  margin: 12px 8px;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0);
+  transition: box-shadow .2s ease;
+}
+
+#parallax__dot li a {
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  transition: transform .2s ease;
+}
+
+#parallax__dot li.active {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 1);
+}
+
+#parallax__dot li.active a {
+  transform: scale(0.4);
+}
+
+/* 3. 숨김메뉴 */
+
+#parallax__menu {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 15px 20px;
+  border-radius: 50px;
+  transition: top 0.3s ease-in-out;
+}
+
+#parallax__menu.hide {
+  top: -200px;
+}
+
+#parallax__menu li {
+  list-style: none;
+  display: inline;
+}
+
+#parallax__menu li a {
+  display: inline-block;
+  padding: 5px 20px;
+  text-align: center;
+  line-height: 30px;
+}
+
+#parallax__menu li.active a {
+  background: #fff;
+  color: black;
+  border-radius: 10%;
+  line-height: 30px;
+}
+
+/* 4. 컨탠츠 나타나기 */
+#contentsShow>section .content__item__num {
+  opacity: 0;
+  transform: translateY(200px);
+  transition: all 1s 0.1s cubic-bezier(0.15, 0.01, 0.15, 0.98);
+
+}
+
+#contentsShow>section .content__item__title {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: all 1s 0.3s cubic-bezier(0.15, 0.01, 0.15, 0.98);
+}
+
+#contentsShow>section .content__item__imgWrap {
+  opacity: 0;
+  transform: translateY(200px) rotate(30deg) skew(20deg);
+  transition: all 1s 0.6s cubic-bezier(0.15, 0.01, 0.15, 0.98);
+}
+
+#contentsShow>section .content__item__desc {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: all 1s 0.9s cubic-bezier(0.15, 0.01, 0.15, 0.98);
+}
+
+#contentsShow>section.show .content__item__num {
+  opacity: 0.07;
+  transform: translateY(0);
+}
+
+#contentsShow>section.show .content__item__title {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+#contentsShow>section.show .content__item__imgWrap {
+  opacity: 1;
+  transform: translateY(0) rotate(0) skew(0);
+}
+
+#contentsShow>section.show .content__item__desc {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+#contentsShow .content__item:nth-child(even) .content__item__title {
+  transform: translateX(100px);
+}
+
+#contentsShow .content__item:nth-child(even).show .content__item__title {
+  transform: translateX(0);
+}
+
+#contentsShow .content__item:nth-child(even) .content__item__desc {
+  transform: translateX(100px);
+}
+
+#contentsShow .content__item:nth-child(even).show .content__item__desc {
+  transform: translateX(0);
+}
+
+/* 한글자씩 나오는 애니메이션 */
+/* .split span {
+  opacity: 0;
+  transition: all .3s;
+}
+
+.split span.show {
+  opacity: 1;
+} */
+
+/* 한글자씩 나오는 애니메이션 gsap 버전*/
+.split span {
+  display: inline-block;
+  min-width: 1vw;
+  opacity: 0;
+  transform: translateY(80px) rotate(234deg);
+}
+
+/* 리빌 효과 */
+
+.reveal>span,
+.reveal>div {
+  opacity: 0;
+}
+
+.reveal.show>span,
+.reveal.show>div {
+  animation: opacity 1s linear forwards;
+}
+
+.reveal {
+  position: relative;
+}
+
+.reveal::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: #fff;
+  z-index: 1;
+}
+
+/* .reveal.reveal-TTB::before,
+        .reveal.reveal-BTT::before {
+            content: '';
+            position: absolute;
+            right: 0; top: 0;
+            width: 100%; height: 0;
+            background: #fff;
+            z-index: 1;
+        } */
+
+.reveal.reveal-two::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: rgb(255, 238, 0);
+  z-index: 1;
+}
+
+/* 기본값 */
+.reveal.show::before {
+  animation: reveal 1s;
+}
+
+.reveal.reveal-RTL.show::before {
+  animation: reveal-RTL 1s;
+}
+
+.reveal.reveal-TTB.show::before {
+  animation: reveal-TTB 1s;
+}
+
+.reveal.reveal-BTT.show::before {
+  animation: reveal-BTT 1s;
+}
+
+/* 두가지 */
+.reveal.show::after {
+  animation: reveal 1000ms 300ms;
+}
+
+.reveal.reveal-RTL.show::after {
+  animation: reveal-RTL 1000ms 300ms;
+}
+
+.reveal.reveal-TTB.show::after {
+  animation: reveal-TTB 1000ms 300ms;
+}
+
+.reveal.reveal-BTT.show::after {
+  animation: reveal-BTT 1000ms 300ms;
+}
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+
+  60% {
+    opacity: 0;
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes reveal {
+  0% {
+    width: 0;
+    left: 0;
+  }
+
+  50% {
+    width: 100%;
+    left: 0;
+  }
+
+  80% {
+    width: 100%;
+    left: 0;
+  }
+
+  100% {
+    width: 0;
+    left: 100%;
+  }
+}
+
+@keyframes reveal-RTL {
+  0% {
+    width: 0;
+    right: 0;
+  }
+
+  50% {
+    width: 100%;
+    right: 0;
+  }
+
+  80% {
+    width: 100%;
+    right: 0;
+  }
+
+  100% {
+    width: 0;
+    right: 100%;
+  }
+}
+
+@keyframes reveal-TTB {
+  0% {
+    width: 100%;
+    height: 0;
+    top: 0;
+  }
+
+  50% {
+    width: 100%;
+    height: 100%;
+    top: 0;
+  }
+
+  80% {
+    width: 100%;
+    height: 100%;
+    top: 0;
+  }
+
+  100% {
+    width: 100%;
+    height: 0;
+    top: 100%;
+  }
+}
+
+@keyframes reveal-BTT {
+  0% {
+    width: 100%;
+    height: 0;
+    top: auto;
+    bottom: 0;
+  }
+
+  50% {
+    width: 100%;
+    height: 100%;
+    top: auto;
+    bottom: 0;
+  }
+
+  80% {
+    width: 100%;
+    height: 100%;
+    top: auto;
+    bottom: 0;
+  }
+
+  100% {
+    width: 100%;
+    height: 0;
+    top: auto;
+    bottom: 100%;
+  }
+}

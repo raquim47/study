@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>끝말잇기</title>
+  </head>
+
+  <body>
+    <div id="loser" class="gameover"><img src="img/game-over.png" alt="loser" /></div>
+    <div id="winner" class="gameover"><img src="img/winner.png" alt="winner" /></div>
+    <h1 class="title">끝말잇기</h1>
+    <form class="start">
+      <div class="start__left">
+        <p class="start__desc">
+          - 규칙<br />1. 국어사전에 등재된 세 자리 한글 명사만 가능<br />2.
+          빨간불이 들어온 뒤 10초 이내에 입력하지 못하면 패배
+        </p>
+        <div class="start__name">
+          <h2>이름을 입력해주세요</h2>
+          <input class="start__input" type="text" maxlength="5" autofocus />
+        </div>
+      </div>
+      <button class="start__btn" type="click">시작</button>
+    </form>
+    <div class="main">
+      <ul class="user_wrap">
+        <li class="user">
+          <div id="userLight" class="user__light"></div>
+          <div class="user__img">
+            <img src="img/dog.png" alt="참가자 이미지" />
+          </div>
+          <h3 id="user__name" class="user__name">00님</h3>
+          <div class="user__word" id="userWord"></div>
+        </li>
+        <li class="user">
+          <div id="comLight" class="user__light active"></div>
+          <div class="user__img">
+            <img src="img/computer.png" alt="참가자 이미지" />
+          </div>
+          <h3 class="user__name">알파고</h3>
+          <div class="user__word" id="comWord"></div>
+        </li>
+      </ul>
+      <div class="answer">
+        <form>
+          <input type="text" maxlength="3" />
+          <div class="cancel"><img src="img/cancel.png" alt="cancel" /></div>
+          <button type="submit">입력</button>
+        </form>
+        <div class="timer">
+          <img src="stop-watch.png" alt="시계 이미지" /><span class="timer__now"
+            >10</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <script src="data2.js"></script>
+    <script>
+      const $startForm = document.querySelector(".start");
+      const $startBtn = document.querySelector(".start__btn");
+      const $startInput = document.querySelector(".start__input");
+      const $main = document.querySelector(".main");
+      const $userName = document.querySelector(".user__name");
+      const $answerForm = document.querySelector(".answer form");
+      const $answerInput = document.querySelector(".answer input");
+      const $timer = document.querySelector(".timer__now");
+
+      const $loser = document.querySelector("#loser");
+      const $winner = document.querySelector("#winner");
+
+      const $comWord = document.querySelector("#comWord");
+      const $userWord = document.querySelector("#userWord");
+
+      const $userLight = document.querySelector("#userLight");
+      const $comLight = document.querySelector("#comLight");
+      // 카운터 실행
+      let count = 1000;
+      let comWord;
+      let userWord;
+
+      const timer = () => {
+        $timer.innerText = count;
+        if (count < 4) {
+          $timer.style.color = "crimson";
+        }
+        if (count === 0) {
+          // 실패 띄우기
+          clearInterval(counter);
+          $loser.classList.add("active");
+          return;
+        }
+        count -= 1;
+      };
+
+      // 정답 입력
+      const enterAnswer = (e) => {
+        e.preventDefault();
+        // 입력한 답을 변수에 저장
+        let answer = $answerInput.value;
+        userWord = answer;
+        $answerInput.value = "";
+        if (
+          comWord[comWord.length - 1] === userWord[0] &&
+          mainDict.includes(answer)
+        ) {
+          // 맞으면?
+          clearInterval(counter);
+          count = 10;
+          $timer.innerText = count;
+          $userWord.innerText = userWord;
+          $comWord.innerText = "";
+          $userLight.classList.remove("active");
+          $comLight.classList.add("active");
+
+          const findingDict = mainDict.filter(
+            (word) => word[0] === userWord[userWord.length - 1]
+          );
+          const proceedingWord =
+            findingDict[Math.round(Math.random() * (findingDict.length - 1))];
+          enterComword(proceedingWord);
+        } else {
+          // 틀리면?
+          const $cancel = document.querySelector(".cancel");
+          $cancel.style.display = "block";
+          setTimeout(() => {
+            $cancel.style.display = "none";
+          }, 200);
+          $answerInput.focus();
+        }
+      };
+
+      // const findingDictWord = dictionary.filter(
+      //   (word) => word[0] === userWord[userWord.length - 1]
+      // );
+
+      // proceedingWord =
+      //   findingDictWord[
+      //     Math.round(Math.random() * (findingDictWord.length - 1))
+      //   ];
+
+      const enterComword = (word) => {
+        setTimeout(() => {
+          // 화면에 단어 표시
+          if (word) {
+            comWord = word;
+            $answerForm.addEventListener("submit", enterAnswer);
+            // 타이머 작동
+            counter = setInterval(timer, 1000);
+            // 화면 바꿔주기
+            $comLight.classList.remove("active");
+            $userLight.classList.add("active");
+            $answerInput.disabled = false;
+            $answerInput.classList.add("active");
+            $answerInput.focus();
+            $userWord.innerText = "";
+            $comWord.innerText = comWord;
+          } else {
+            // 유저 승리
+            $winner.classList.add('active');
+          }
+        }, 1000);
+      };
+
+      $answerInput.disabled = true;
+
+      // 이름입력
+      const inputName = () => {
+        const name = $startInput.value;
+        // 이름이 입력되면
+        if (name) {
+          // 이름 등록
+          $startForm.style.display = "none";
+          $main.style.display = "block";
+          $userName.innerText = name;
+          //컴퓨터 단어입력!
+          // 스타트 단어
+          startWord =
+            startDict[Math.round(Math.random() * (startDict.length - 1))];
+          enterComword(startWord);
+
+          // 이름이 입력 안되면
+        } else {
+          alert("이름을 입력해주세요!");
+        }
+      };
+
+      $startForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        inputName();
+        $answerInput.focus();
+      });
+    </script>
+  </body>
+</html>
