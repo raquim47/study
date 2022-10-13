@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>버튼-jsx</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+      // 1.
+      // const array = [];
+      // pop, push, shift, unshift, splice -> 배열을 직접적으로 수정
+      // concat, slice -> 새로운 배열을 만들어냄
+      // 2. React Developer Tools 설치
+      // 3. 객체를 함부로 바꾸지말고 복사해라!
+      "use strict";
+      class LikeButton extends React.Component {
+        // constructor(props) {
+        //   super(props);
+        //   this.state = { liked: false };
+        // }
+        // constructor 대신 사용하는 문법!
+        state = { liked: false };
+
+        onClickButton = () => {
+          this.setState({ liked: true });
+        };
+
+        render() {
+          if (this.state.liked) {
+            return "You liked this.";
+          }
+
+          return (
+            // <button onClick={() => this.setState({ liked: true })}>Like</button>
+            <button onClick={this.onClickButton}>Like</button>
+          );
+        }
+      }
+    </script>
+    <script type="text/babel">
+      // ReactDOM.render(React.createElement(LikeButton), document.querySelector("#root")); //17버전 코드
+      ReactDOM.createRoot(document.querySelector("#root")).render(
+        <LikeButton />
+      ); // 18버전 코드
+    </script>
+  </body>
+</html>

@@ -5,8 +5,8 @@
 </head>
 <body>
 <div id="root"></div>
-<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
 <script type="text/babel">
@@ -21,7 +21,8 @@
     const onSubmitForm = (e) => {
       e.preventDefault();
       if (parseInt(value) === first * second) {
-        setResult('정답');
+        // 정답일때 정답값도 같이 보여주기
+        setResult('정답: ' + value);
         setFirst(Math.ceil(Math.random() * 9));
         setSecond(Math.ceil(Math.random() * 9));
         setValue('');
@@ -51,7 +52,7 @@
 
 </script>
 <script type="text/babel">
-  ReactDOM.render(<GuGuDan/>, document.querySelector('#root'));
+  ReactDOM.createRoot(document.querySelector("#root")).render(<GuGuDan />);
 </script>
 </body>
 </html>
