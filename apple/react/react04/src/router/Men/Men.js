@@ -15,12 +15,15 @@ const Men = (props) => {
   });
 
   // 데이터 받아오기
-  function getData(index) {
-    axios.get("https://codingapple1.github.io/shop/data2.json").then((data) => {
-      setProducts(data[index]);
-    });
+  function getData(index){
+    fetch(`https://raquim47.github.io/data/cozy/json/men.json`)
+      .then(res => res.json())
+      .then(data => {
+        setProducts(data);
+      })
   }
-
+  
+  console.log(products);
   return (
     <div className={styles.men}>
       <div className={styles.men_cover}></div>

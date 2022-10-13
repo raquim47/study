@@ -2,7 +2,6 @@ import { Routes,Route,Link,useNavigate,Outlet } from 'react-router-dom';
 import { useState } from 'react';
 // css
 import "./reset.css";
-import "./App.css";
 // component
 import Nav from "./components/Nav/Nav";
 // route
