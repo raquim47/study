@@ -32,9 +32,7 @@
             return "You liked this.";
           }
           return React.createElement(
-            "button",
-            { onClick: () => this.setState({ liked: true }) },
-            "Like"
+            "button", { onClick: () => this.setState({ liked: true }) }, "Like"
           );
         }
       }

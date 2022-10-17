@@ -40,17 +40,23 @@
           }
 
           return (
-            // <button onClick={() => this.setState({ liked: true })}>Like</button>
+            <div>
+        {/*<button onClick={() => this.setState({ liked: true })}>Like</button>*/}
             <button onClick={this.onClickButton}>Like</button>
+            {[1,2,3].map(i => {
+              return <div key={i}>{i}</div>;
+            })}
+            </div>
           );
         }
       }
     </script>
     <script type="text/babel">
       // ReactDOM.render(React.createElement(LikeButton), document.querySelector("#root")); //17버전 코드
+      // 18버전 코드
       ReactDOM.createRoot(document.querySelector("#root")).render(
         <LikeButton />
-      ); // 18버전 코드
+      );
     </script>
   </body>
 </html>
