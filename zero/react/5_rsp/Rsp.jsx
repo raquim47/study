@@ -26,20 +26,20 @@ const Rsp = () => {
   const interval = useRef();
   const clickable = useRef(true);
   
-  //Lifecycle hook
-  // useEffect(()=>{ 실행할코드 }) : 컴포넌트 재렌더링마다 코드를 실행
-  // useEffect(()=>{ 실행할코드 }, []) : 컴포넌트 mount시 (로드시) 1회만 실행
-  // useEffect(()=>{ 
-  //   return ()=>{
-  //     실행할코드
-  //   }
-  // }) useEffect 안의 코드 실행 전에 항상 실행
-  //useEffect(()=>{ 
-  //   return ()=>{
-  //     실행할코드
-  //   }
-  // }, []) 컴포넌트 unmount시 1회 실행
-  // useEffect(()=>{ 
+//   Lifecycle hook
+//   useEffect(()=>{ 실행할코드 }) : 컴포넌트 재렌더링마다 코드를 실행
+//   useEffect(()=>{ 실행할코드 }, []) : 컴포넌트 mount시 (로드시) 1회만 실행
+//   useEffect(()=>{ 
+//     return ()=>{
+//       실행할코드
+//     }
+//   }) useEffect 안의 코드 실행 전에 항상 실행
+//   useEffect(()=>{ 
+//     return ()=>{
+//       실행할코드
+//     }
+//   }, []) 컴포넌트 unmount시 1회 실행
+//   useEffect(()=>{ 
 //   실행할코드
 // }, [state1]) state1이 변경될 때만 실행
   useEffect(() => { // componentDidMount

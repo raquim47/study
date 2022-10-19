@@ -19,6 +19,8 @@ const Baseball = () => {
   // 계속 함수가 재실행 되기 때문에 비효율적
   // getNumbers를 넣어주면 처음에 '한 번' 실행된 함수의 리턴값이 쓰인다
   // lazy init(늦은 초기화) 함수가 호출되서 리턴값을 반환할때 까지 기다려줌
+
+  
   const [answer, setAnswer] = useState(getNumbers);
   const [value, setValue] = useState('');
   const [result, setResult] = useState('');

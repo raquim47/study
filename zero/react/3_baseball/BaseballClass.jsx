@@ -96,7 +96,6 @@ class Baseball extends Component {
     const { result, value, tries } = this.state;
     return(
       <>
-      <React.StrictMode>
         <h1>{result}</h1>
         <form onSubmit={this.onSubmitForm}>
           <input ref={this.inputRef} maxLength={4} value={this.state.value} onChange={this.onChangeInput}/>
@@ -113,7 +112,6 @@ class Baseball extends Component {
             )
           })}
         </ul>
-        </React.StrictMode>
       </>
     )
   }

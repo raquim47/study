@@ -19,7 +19,7 @@ const computerChoice = (imgCoord) => {
 };
 // 리액트 사이프사이클
 // 클래스
-// constructor -> render -> redf -> componentDidMount
+// constructor -> componentWillMount-> render -> ref -> componentDidMount
 // setState/props바뀔 때 -> shouldComponentUpdate(true) -> render -> componentDidUpdate
 // 부모 컴포넌트가 자식컴포넌트를 없앴을 때 -> componentWillUnmount -> 소멸
 class Rsp extends Component {
