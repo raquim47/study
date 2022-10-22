@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    const canvas = document.querySelector('#canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth - 100;
+    canvas.height = window.innerHeight - 100;
+
+    const img1 = new Image();
+    img1.src = 'cactus.png';
+    const img2 = new Image();
+    img2.src = 'dinosaur.png';
+    
+    const dino = {
+      x: 10,
+      y: 200,
+      width: 50,
+      height: 50,
+      color: 'green',
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x, this.y, this.width, this.height); // 좌표 / 사이즈
+        ctx.drawImage(img2, this.x, this.y);
+      }
+    }
+    dino.draw();
+    
+
+    class Cactus {
+      constructor() {
+        this.x = 500;
+        this.y = 200;
+        this.width = 50;
+        this.height = 50;
+        this.color = 'orange';
+      }
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x, this.y, this.width, this.height); // 좌표 / 사이즈
+        ctx.drawImage(img1, this.x, this.y)
+      }
+    }
+
+    let jumping = false;
+    let jumpTimer = 0;
+    let timer = 0;
+    let cactuses = [];
+    let animation;
+    // 모니터마다 일정하게 60프레임으로?
+    function 프레임마다실행할코드() {
+      animation = requestAnimationFrame(프레임마다실행할코드);
+      timer++;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (timer % 80 === 0) {
+        const cactus = new Cactus();
+        cactuses.push(cactus);
+      }
+
+      cactuses.forEach((item, i, arr) => {
+        if (item.x < 0) {
+          arr.splice(i, 1);
+        }
+        crash(dino, item);
+        item.x = item.x - 2;
+        item.draw();
+      });
+
+      if (jumping) {
+        dino.y-=10;
+        jumpTimer++;
+      }
+      if (!jumping && dino.y < 200) {
+        dino.y++;
+      }
+      if (jumpTimer > 100) {
+        jumping = false
+        jumpTimer = 0;
+      }
+
+      dino.draw();
+    }
+    프레임마다실행할코드();
+
+    function crash(dino, cactus){
+      let xDiff = cactus.x - (dino.x + dino.width);
+      let yDiff = cactus.y - (dino.y + dino.height);
+      if(xDiff < 0 && yDiff < 0){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        cancelAnimationFrame(animation);
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        jumping = true;
+      }
+    })
+  </script>
+</body>
+
+</html>
