@@ -10,6 +10,9 @@ import Ball from "./Ball";
 // useRef: 일반 값을 기억
 // useMemo: 복잡한 함수 결괏값을 기억
 // useCallback: 함 수 자체를 기억
+// 모든 함수에 useCallback를 적용하면 이득일까?
+// useCallback안에서 state를 쓸 때는 두번째 배열에 넣어줘야한다.
+// 
 function getWinNumbers() {
   const candidate = Array(45)
     .fill()

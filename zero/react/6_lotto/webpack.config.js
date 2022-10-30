@@ -13,7 +13,7 @@ module.exports = {
   },
   module: {
     rules: [{
-      test: /\.jsx?$/,
+      test: [/\.jsx?$/, /\.css?$/],
       loader: 'babel-loader',
       options: {
         presets: [
