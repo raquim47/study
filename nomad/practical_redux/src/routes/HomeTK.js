@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { connect } from "react-redux";
-import { actionCreators } from "../store";
-import ToDo from "./../components/ToDo";
+// import { actionCreators } from "../storeTK";
+import { add } from "./../storeTK";
+import ToDoTK from "./../components/ToDoTK";
 
 const HomeTK = ({ toDos, addToDo }) => {
   const [text, setText] = useState("");
@@ -10,9 +11,9 @@ const HomeTK = ({ toDos, addToDo }) => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
+    setText("");
     const id = Date.now();
     addToDo(text, id);
-    setText("");
   };
   return (
     <>
@@ -23,7 +24,7 @@ const HomeTK = ({ toDos, addToDo }) => {
       </form>
       <ul>
         {toDos.map((toDo) => (
-          <ToDo {...toDo} key={toDo.id}/>
+          <ToDoTK {...toDo} key={toDo.id} />
         ))}
       </ul>
     </>
@@ -35,8 +36,9 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    // text, id -> {text, id}
-    addToDo: (text, id) => dispatch(actionCreators.addToDo({text, id})),
+    // text, id -> {text, id} 객체로 보낼 것
+    // addToDo: (text, id) => dispatch(actionCreators.addToDo({ text, id })),
+    addToDo: (text, id) => dispatch(add({ text, id })),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HomeTK);

@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } 
 from "react-router-dom";
 import HomeTK from "./../routes/HomeTK";
-import Detail from "./../routes/Detail";
+import DetailTK from "./../routes/DetailTK";
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<HomeTK />} />
-        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/detail/:id" element={<DetailTK />} />
       </Routes>
     </Router>
   );
