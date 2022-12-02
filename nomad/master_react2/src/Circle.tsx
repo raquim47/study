@@ -1,25 +1,36 @@
+import { useState } from "react";
 import styled from "styled-components";
 
+// Container의 타입선언
 interface ContainerProps {
   bgColor: string;
   borderColor: string;
 }
-
+// Container 스타일 컴포넌트
 const Container = styled.div<ContainerProps>`
   width: 200px;
   height: 200px;
   border-radius: 50%;
   background: ${(props) => props.bgColor};
-  border: 3px solid ${(props) => props.borderColor};
+  border: 30px solid ${(props) => props.borderColor};
+  color: white;
+  text-align: center;
 `;
-
+// Circle의 타입선언
 interface CircleProps {
   bgColor: string;
   borderColor?: string;
+  text?: string;
 }
-
-const Circle = ({ bgColor, borderColor }: CircleProps) => {
-  return <Container bgColor={bgColor} borderColor={borderColor ?? bgColor}></Container>;
+// Circle 컴포넌트
+const Circle = ({ bgColor, borderColor, text= "default text" }: CircleProps) => {
+  const [counter, setCounter] = useState<number|string>(1 );
+  return (
+    <Container
+      bgColor={bgColor}
+      borderColor={borderColor ?? bgColor}
+    >{text}</Container>
+  );
 };
 
 export default Circle;
