@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { useLocation, useParams } from "react-router";
+import { Helmet } from "react-helmet";
 import styled from "styled-components";
-import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
+import {
+  Link,
+  Switch,
+  Route,
+  useRouteMatch,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import Price from "./Price";
 import Chart from "./Chart";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
-import { Helmet } from "react-helmet";
 
 interface RouterParams {
   coinId: string;
@@ -22,6 +27,7 @@ const Loader = styled.span`
 `;
 
 const Container = styled.div`
+  position: relative;
   padding: 0px 20px;
   max-width: 480px;
   margin: 0 auto;
@@ -138,6 +144,14 @@ const Tab = styled.span<{ isActive: boolean }>`
   }
 `;
 
+const BackBtn = styled.div`
+  position: absolute;
+  top: 50px;
+  right: 100%;
+  a {
+    font-size: 30px;
+  }
+`;
 const Coin = () => {
   const priceMatch = useRouteMatch("/:coinId/price");
   const chartMatch = useRouteMatch("/:coinId/chart");
@@ -155,6 +169,8 @@ const Coin = () => {
       refetchInterval: 5000,
     }
   );
+  const loading = infoLoading || tickersLoading;
+
   // const [loading, setLoading] = useState(true);
   // const [info, setInfo] = useState<InfoData>();
   // const [priceInfo, setPriceInfo] = useState<PriceData>();
@@ -172,17 +188,21 @@ const Coin = () => {
   //   })();
   // }, [coinId]); // dependency 가 필요한 이유?
   // // https://parkjaeho.tistory.com/109
-  console.log(infoData);
-  const loading = infoLoading || tickersLoading;
+
   return (
     <Container>
+      <BackBtn>
+        <Link to="/">🏠</Link>
+      </BackBtn>
       <Helmet>
         <title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </title>
       </Helmet>
       <Header>
-        <Title>{state?.name ? state.name : loading ? "Loading..." : infoData?.name}</Title>
+        <Title>
+          {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
+        </Title>
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>
@@ -223,7 +243,7 @@ const Coin = () => {
           </Tabs>
           <Switch>
             <Route path={`/:coinId/price`}>
-              <Price></Price>
+              <Price coinId={coinId}></Price>
             </Route>
             <Route path={`/:coinId/chart`}>
               <Chart coinId={coinId} />
