@@ -219,7 +219,7 @@ const Coin = () => {
             </OverviewItem>
             <OverviewItem>
               <span>Price:</span>
-              <span>{tickersData?.quotes.USD.price.toFixed(2)}</span>
+              <span>{tickersData?.quotes?.USD?.price?.toFixed(2)}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
@@ -246,7 +246,7 @@ const Coin = () => {
               <Price coinId={coinId}></Price>
             </Route>
             <Route path={`/:coinId/chart`}>
-              <Chart coinId={coinId} />
+              <Chart coinId={coinId}/>
             </Route>
           </Switch>
         </>

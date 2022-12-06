@@ -12,8 +12,8 @@ export const fetchCoinTickers = (coinId: string) => {
 };
 
 export const fetchCoinHistory = (coinId: string) => {
-  const endDate = Math.floor(Date.now() / 1000);
-  const startDate = endDate - 60 * 60 * 23 * 7 * 1;
+  // const endDate = Math.floor(Date.now() / 1000);
+  // const startDate = endDate - 60 * 60 * 23 * 7 * 1;
   return fetch(
     `https://ohlcv-api.nomadcoders.workers.dev?coinId=${coinId}`
   ).then((res) => res.json());

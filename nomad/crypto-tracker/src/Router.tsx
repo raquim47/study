@@ -7,10 +7,10 @@ const Router = () => {
       <Switch>
         {/* 왜 위에 있어야될까? */}
         <Route path="/:coinId">
-          <Coin />
+          <Coin/>
         </Route>
         <Route path="/">
-          <Coins />
+          <Coins/>
         </Route>
       </Switch>
     </BrowserRouter>

@@ -3,6 +3,8 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { fetchCoins } from "../api";
 import styled from "styled-components";
+import { useSetRecoilState } from "recoil";
+import { isDarkAtom } from "../atoms";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -23,8 +25,9 @@ const CoinList = styled.ul``;
 const Coin = styled.li`
   margin-bottom: 10px;
   border-radius: 15px;
-  background-color: white;
-  color: ${(props) => props.theme.bgColor};
+  background-color: ${(props) => props.theme.cardBgColor};
+  color: ${(props) => props.theme.textColor};
+  border: 1px solid white;
   a {
     display: flex;
     align-items: center;
@@ -62,10 +65,15 @@ interface ICoin {
   type: string;
 }
 const Coins = () => {
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const toggleDarkAtom = () => {
+    setDarkAtom((prev) => !prev);
+  };
   // 리액트 쿼리는 데이터를 파괴하지 않고 캐시에 저장
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins, {
     select: (data) => data.slice(0, 30),
   }); //(QUERY_KEY, FECTCHER_FUNC, filter)
+
   return (
     <Container>
       <Helmet>
@@ -73,6 +81,7 @@ const Coins = () => {
       </Helmet>
       <Header>
         <Title>Crypto Tracker</Title>
+        <button onClick={toggleDarkAtom}>Toggle Mode</button>
       </Header>
       {isLoading ? (
         <Loader>"Loading..."</Loader>
