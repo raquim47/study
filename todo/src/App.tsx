@@ -1,6 +1,9 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import ToDoList from './components/ToDoList';
-
+import { darkTheme, lightTheme } from './theme';
+import { useRecoilValue } from 'recoil';
+import { isDarkState } from './atom';
+import { useEffect } from 'react';
 const GlobalStyle = createGlobalStyle`
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -59,10 +62,18 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  const isDark = useRecoilValue(isDarkState);
+  console.log(isDark)
+  useEffect(() => {
+    localStorage.setItem('isDark', JSON.stringify(isDark));
+  }, [isDark]);
+
   return (
     <>
-      <GlobalStyle />
-      <ToDoList />
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        <GlobalStyle />
+        <ToDoList />
+      </ThemeProvider>
     </>
   );
 }

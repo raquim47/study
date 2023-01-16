@@ -2,9 +2,13 @@ import 'styled-components';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
-    textColor:string;
-    bgColor:string;
-    accentColor:string;
-    cardBgColor: string;
+    bgColor: string;
+		textColor: string;
+		accentColor: string;
+		accentFadedColor: string;
+		cardColor: string;
+		activeCardColor: string;
+		buttonColor: string;
+		hoverButtonColor: string;
   }
 }
