@@ -1,32 +1,37 @@
 import { atom, selector } from 'recoil';
-// selector는 atom 의 output을 변형시키는 도구
 
+// 다크모드
 export const isDarkState = atom<boolean>({
   key: 'isDark',
-  default: localStorage.getItem('isDark') ? false : true,
+  default: JSON.parse(localStorage.getItem('isDark') ?? JSON.stringify(false)),
 });
 
-// 로컬스토래지에 isDark가 있으면 false, 
-export enum Categories {
+// 카테고리
+export enum EnumCategories {
   'TO_DO' = 'TO_DO',
   'DOING' = 'DOING',
   'DONE' = 'DONE',
 }
 
+export const categoryState = atom<EnumCategories>({
+  key: 'category',
+  default: EnumCategories.TO_DO,
+});
+
+
+const defaultCategories = ['TO_DO', 'DOING', 'DONE'];
+
 export interface IToDo {
   text: string;
   id: number;
-  category: Categories;
+  category: string;
 }
 
-export const categoryState = atom<Categories>({
-  key: 'category',
-  default: Categories.TO_DO,
-});
+
 
 export const toDoState = atom<IToDo[]>({
   key: 'toDo',
-  default: [],
+  default: JSON.parse(localStorage.getItem("toDos") ?? "[]"),
 });
 
 export const toDoSelector = selector({
