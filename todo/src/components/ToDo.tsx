@@ -77,7 +77,7 @@ const ToDo = ({ text, category, id }: IToDo) => {
   };
 
   const deleteToDo = (toDoName: string) => () => {
-		if (window.confirm(`${toDoName} 할 일을 정말 삭제하시겠어요?`)) {
+		if (window.confirm(`${toDoName}을 정말 삭제하시겠어요?`)) {
 			setToDos((oldToDos) => {
 				const targetIndex = oldToDos.findIndex((oldToDo) => oldToDo.id === id);
 

@@ -63,7 +63,7 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
   const isDark = useRecoilValue(isDarkState);
-  console.log(isDark)
+  
   useEffect(() => {
     localStorage.setItem('isDark', JSON.stringify(isDark));
   }, [isDark]);
