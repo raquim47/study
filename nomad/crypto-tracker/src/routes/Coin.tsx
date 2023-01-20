@@ -201,7 +201,7 @@ const Coin = () => {
       </Helmet>
       <Header>
         <Title>
-          {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
+          {state?.name && state.name}
         </Title>
       </Header>
       {loading ? (
