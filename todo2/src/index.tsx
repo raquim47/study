@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { RecoilRoot } from 'recoil';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import { darkTheme, lightTheme } from './theme';
+import { darkTheme } from './theme';
 
 const GlobalStyle = createGlobalStyle`
   html, body, div, span, applet, object, iframe,
@@ -30,7 +30,10 @@ const GlobalStyle = createGlobalStyle`
     display: block;
   }
   body {
-    line-height: 1;
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: ${(props) => props.theme.bgColor};
+    color: 'black';
+    line-height: 1.2;
   }
   ol, ul {
     list-style: none;
@@ -50,11 +53,6 @@ const GlobalStyle = createGlobalStyle`
   *{
     box-sizing: border-box;
   }
-  body {
-    font-family: 'Source Sans Pro', sans-serif;
-    background-color: ${(props) => props.theme.bgColor};
-    color: ${(props) => props.theme.textColor};
-  }
   a{
     text-decoration: none;
     color: inherit;
@@ -67,7 +65,8 @@ const root = ReactDOM.createRoot(
 root.render(
   // <React.StrictMode>
   <RecoilRoot>
-    <ThemeProvider theme={darkTheme}> 
+    <ThemeProvider theme={darkTheme}>
+      <GlobalStyle />
       <App />
     </ThemeProvider>
   </RecoilRoot>
