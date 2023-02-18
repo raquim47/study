@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useNavigate, useMatch } from 'react-router-dom';
 import styled from 'styled-components';
 import { getMovies, IGetMoviesResult } from '../api';
 import { makeImagePath } from '../utils';
@@ -106,14 +106,14 @@ const BigTitle = styled.h2`
   top: -70px;
   padding: 20px;
   font-size: 30px;
-  color: ${(props) => props.theme.white.lighter};
+  color: ${(props) => props.theme.white.white};
 `;
 
 const BigOverview = styled.p`
   position: relative;
   top: -70px;
   padding: 20px;
-  color: ${(props) => props.theme.white.lighter};
+  color: ${(props) => props.theme.white.white};
 `;
 const Overlay = styled(motion.div)`
   position: fixed;
@@ -167,8 +167,9 @@ const infoVariants = {
 const offset = 6;
 
 function Home() {
-  const history = useHistory();
-  const bigMovieMatch = useRouteMatch<{ movieId: string }>('/movies/:movieId');
+  const navigate = useNavigate();
+  const bigMovieMatch = useMatch('/movies/:movieId');
+
   const { data, isLoading } = useQuery<IGetMoviesResult>(
     ['movies', 'nowPlaying'],
     getMovies
@@ -187,9 +188,10 @@ function Home() {
   const toggleLeaving = () => setLeaving((prev) => !prev);
 
   const onBoxClicked = (movieId: number) => {
-    history.push(`/movies/${movieId}`);
+    navigate(`/detail/${movieId}`);
   };
-  const onOverlayClicked = () => history.push('/');
+
+  const onOverlayClicked = () => navigate('/');
   const clickedMovie =
     bigMovieMatch?.params.movieId &&
     data?.results.find(
@@ -241,33 +243,6 @@ function Home() {
               </Row>
             </AnimatePresence>
           </Slider>
-          <AnimatePresence>
-            {bigMovieMatch ? (
-              <>
-                <Overlay
-                  onClick={onOverlayClicked}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                />
-                <BigMovie layoutId={bigMovieMatch.params.movieId}>
-                  {clickedMovie && (
-                    <>
-                      <BigCover
-                        style={{
-                          backgroundImage: `linear-gradient(to top, black, transparent), url(${makeImagePath(
-                            clickedMovie.backdrop_path,
-                            'w500'
-                          )})`,
-                        }}
-                      />
-                      <BigTitle>{clickedMovie.title}</BigTitle>
-                      <BigOverview>{clickedMovie.overview}</BigOverview>
-                    </>
-                  )}
-                </BigMovie>
-              </>
-            ) : null}
-          </AnimatePresence>
         </>
       )}
     </Wrapper>

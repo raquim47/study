@@ -4,8 +4,9 @@ import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 import { theme } from './theme';
-import App from './App';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { RouterProvider } from 'react-router-dom';
+import router from './Router';
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -79,11 +80,12 @@ const client = new QueryClient();
 
 root.render(
   // <React.StrictMode>
+  
   <RecoilRoot>
     <QueryClientProvider client={client}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <App />
+        <RouterProvider router={router} />
       </ThemeProvider>
     </QueryClientProvider>
   </RecoilRoot>
