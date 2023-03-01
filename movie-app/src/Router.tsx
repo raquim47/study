@@ -3,7 +3,6 @@ import Root from './Root';
 import Detail from './Routes/Detail';
 import Drama from './Routes/Drama';
 import Favorite from './Routes/Favorite';
-import Home from './Routes/Home';
 import Movie from './Routes/Movie';
 import NotFound from './Routes/NotFound';
 import Rate from './Routes/Rate';

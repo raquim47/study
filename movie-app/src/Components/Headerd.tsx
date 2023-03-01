@@ -232,7 +232,7 @@ function Header() {
         <Search ref={searchRef} onSubmit={handleSubmit(onValid)}>
           <motion.svg
             onClick={toggleSearch}
-            animate={{ x: searchOpen ? -10 : 0 }}
+            animate={{ x: searchOpen ? -180 : 0 }}
             transition={{ type: 'linear' }}
             fill="currentColor"
             viewBox="0 0 20 20"
