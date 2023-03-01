@@ -23,6 +23,10 @@ const router = createBrowserRouter([
         element: <Drama />, 
       },
       {
+        path: 'detail/:id',
+        element: <Detail />, 
+      },
+      {
         path: 'rate',
         element: <Rate />, 
       },

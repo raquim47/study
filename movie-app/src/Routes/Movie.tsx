@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import {
   getMovieDetail,
   getMoviesLatest,
+  getMoviesTopRated,
+  getMoviesTrending,
   getMoviesUpcoming,
   IGetMoviesResult,
   IMovie,
@@ -35,6 +37,12 @@ function Movie() {
   // useQuery for Upcoming Movie
   const { data: dataUpcoming, isLoading: isLoadingUpcoming } =
     useQuery<IGetMoviesResult>(['movies', 'upcoming'], getMoviesUpcoming);
+  // useQuery for Trending Movie
+  const { data: dataTrending, isLoading: isLoadingTrending } =
+    useQuery<IGetMoviesResult>(['movies', 'trending'], getMoviesTrending);
+  // useQuery for TopRated
+  const { data: dataTopRated, isLoading: isLoadingTopRated } =
+    useQuery<IGetMoviesResult>(['movies', 'topRated'], getMoviesTopRated);
   // useQuery for Banner
   const { data: dataBannerLeft, isLoading: isLoadingBannerLeft } =
     useQuery<IMovie>(
@@ -59,8 +67,7 @@ function Movie() {
     isLoadingUpcoming ||
     isLoadingBannerRight;
 
-  const offset = 6;
-
+      console.log(dataUpcoming)
   return (
     <Wrapper>
       {loadings ? (
@@ -75,13 +82,18 @@ function Movie() {
           <Slider
             data={dataLatest as IGetMoviesResult}
             rowIndex={1}
-            title="신작 영화"
+            title="최신 개봉"
           />
-          {/* <Slider
-            data={dataLatest as IGetMoviesResult}
-            rowIndex={1}
-            title="신작 영화"
-          /> */}
+          <Slider
+            data={dataTrending as IGetMoviesResult}
+            rowIndex={0}
+            title="요즘 인기"
+          />
+          <Slider
+            data={dataTopRated as IGetMoviesResult}
+            rowIndex={0}
+            title="Top 평점"
+          />
         </>
       )}
     </Wrapper>

@@ -36,7 +36,6 @@ const Wrapper = styled.div`
       opacity: 1;
     }
   }
-  border: 2px solid red;
 `;
 
 const Content = styled.div`
@@ -215,17 +214,21 @@ function Slider({ data, title, rowIndex }: ISliderProps) {
               .slice(offset * index, offset * index + offset)
               .map((movie) => (
                 <Box
-                  layoutId={movie.id + ''}
+                  layoutId={title + movie.id + ''}
                   key={movie.id}
                   variants={boxVariants}
                   whileHover="hover"
                   initial="normal"
                   transition={{ type: 'tween' }}
-                  $bgPhoto={makeImagePath(movie.backdrop_path, 'w500')}
+                  $bgPhoto={
+                    movie.backdrop_path
+                      ? makeImagePath(movie.backdrop_path, 'w500')
+                      : require('../assets/no-image-icon-6.png')
+                  }
                 >
                   <Info variants={infoVariants}>
                     <h4>{movie.title}</h4>
-                    <small>평점 : {movie.vote_average}</small>
+                    <small>평점 : {movie.vote_average?.toFixed(1)}</small>
                     <article>
                       {movie.genre_ids?.map((id) => (
                         <span key={id}>{genres[String(id)]}</span>
